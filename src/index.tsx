@@ -41,21 +41,12 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
             }
           });
         },
-        // expose: () => {
-        //   if (nativeRef.current) {
-        //     return SignOnGlassViewCommands.exposeSignature(nativeRef.current);
-        //   }
-        //   return null;
-        // },
-        // Add other methods you might want to expose
       }),
       [nativeRef]
     );
 
     const handleSignatureExposed = (event: any) => {
       const signature = event.nativeEvent.signature || '';
-      console.log(signature);
-
       if (signaturePromiseRef.current) {
         signaturePromiseRef.current.resolve(signature);
         signaturePromiseRef.current = null;
