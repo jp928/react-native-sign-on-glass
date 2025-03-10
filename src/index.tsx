@@ -28,7 +28,7 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
             SignOnGlassViewCommands.clearSignature(nativeRef.current);
           }
         },
-        expose: () => {
+        expose: async () => {
           // Return a new promise
           return new Promise<string>((resolve, reject) => {
             if (nativeRef.current) {
@@ -46,6 +46,7 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
     );
 
     const handleSignatureExposed = (event: any) => {
+      console.log('handleSignatureExposed', event.nativeEvent);
       const signature = event.nativeEvent.signature || '';
       if (signaturePromiseRef.current) {
         signaturePromiseRef.current.resolve(signature);
