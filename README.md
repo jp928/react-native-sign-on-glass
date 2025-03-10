@@ -11,7 +11,7 @@ react-native new architecture only, iOS 13+.
 
 ## Implementation 
 iOS: native [PencilKit](https://developer.apple.com/documentation/pencilkit)
-Android: TBC
+Android: [android-signaturepad](https://github.com/gcacace/android-signaturepad)
 
 
 ## Installation
