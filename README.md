@@ -2,6 +2,18 @@
 
 Sign on glass
 
+A signature capture library which is powered by react native new architecture
+
+## Limitation
+
+react-native new architecture only, iOS 13+.
+
+
+## Implementation 
+iOS: native (pencil kit)[https://developer.apple.com/documentation/pencilkit]
+Android: TBC
+
+
 ## Installation
 
 ```sh
