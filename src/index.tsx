@@ -46,7 +46,6 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
     );
 
     const handleSignatureExposed = (event: any) => {
-      console.log('handleSignatureExposed', event.nativeEvent);
       const signature = event.nativeEvent.signature || '';
       if (signaturePromiseRef.current) {
         signaturePromiseRef.current.resolve(signature);
