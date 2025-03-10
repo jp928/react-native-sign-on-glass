@@ -1,5 +1,6 @@
 #import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
+#import <PencilKit/PencilKit.h>
 
 #ifndef SignOnGlassViewNativeComponent_h
 #define SignOnGlassViewNativeComponent_h

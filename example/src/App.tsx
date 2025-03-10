@@ -1,10 +1,17 @@
-import { View, StyleSheet } from 'react-native';
-import { SignOnGlassView } from 'react-native-sign-on-glass';
+import { useRef } from 'react';
+import { View, StyleSheet, Button } from 'react-native';
+import SignOnGlassView from 'react-native-sign-on-glass';
 
 export default function App() {
+  const ref = useRef<any>(null);
   return (
     <View style={styles.container}>
-      <SignOnGlassView color="#32a852" style={styles.box} />
+      <SignOnGlassView ref={ref} color="#e3e3e3" style={styles.box} />
+      <Button title="Clear" onPress={() => ref.current.clear()} />
+      <Button
+        title="Expose"
+        onPress={() => console.log(ref.current.expose())}
+      />
     </View>
   );
 }
@@ -16,8 +23,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: 60,
-    height: 60,
+    width: 200,
+    height: 200,
     marginVertical: 20,
   },
 });
