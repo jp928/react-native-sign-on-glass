@@ -84,3 +84,8 @@ android/generated
 
 # React Native Nitro Modules
 nitrogen/
+
+# Android
+android/gradle
+android/gradlew
+android/gradlew.bat
