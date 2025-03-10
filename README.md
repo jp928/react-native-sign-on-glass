@@ -10,7 +10,7 @@ react-native new architecture only, iOS 13+.
 
 
 ## Implementation 
-iOS: native (pencil kit)[https://developer.apple.com/documentation/pencilkit]
+iOS: native [PencilKit](https://developer.apple.com/documentation/pencilkit)
 Android: TBC
 
 
@@ -24,7 +24,7 @@ npm install react-native-sign-on-glass
 
 
 ```js
-import { SignOnGlassView } from "react-native-sign-on-glass";
+import SignOnGlassView from "react-native-sign-on-glass";
 
 // ...
 
