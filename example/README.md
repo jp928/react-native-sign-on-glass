@@ -1,5 +1,15 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+## Limitation
+
+react-native new architecture only, iOS 13+.
+
+
+## Implementation 
+iOS: native [PencilKit](https://developer.apple.com/documentation/pencilkit)
+Android: [android-signaturepad](https://github.com/gcacace/android-signaturepad)
+
+
 # Getting Started
 
 ```
