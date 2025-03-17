@@ -1,8 +1,4 @@
-# react-native-sign-on-glass
-
-Sign on glass
-
-A signature capture library which is powered by react native new architecture
+This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 ## Limitation
 
@@ -14,32 +10,52 @@ iOS: native [PencilKit](https://developer.apple.com/documentation/pencilkit)
 Android: [android-signaturepad](https://github.com/gcacace/android-signaturepad)
 
 
-## Installation
+# Getting Started
 
-```sh
+```
+yarn add react-native-sign-on-glass 
+```
+or 
+
+```
 npm install react-native-sign-on-glass
 ```
 
-## Usage
+inside ios folder run
 
-
-```js
-import SignOnGlassView from "react-native-sign-on-glass";
-
-// ...
-
-<SignOnGlassView color="tomato" />
+```
+pod install
 ```
 
+inside android folder run
 
-## Contributing
+```
+./gradlew clean
+```
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+# How to use
 
-## License
+```
+import SignOnGlassView from 'react-native-sign-on-glass';
+<View style={styles.container}>
+  <SignOnGlassView ref={ref} color="#e3e3e3" style={styles.box} />
+  <Button title="Clear" onPress={() => ref.current.clear()} />
+  <Button
+    title="Expose"
+    onPress={async () => {
+      const base64 = await ref.current.expose();
+      console.log(base64);
+    }}
+  />
+</View>
+```
 
-MIT
+## Imperative API
 
----
+### `clear()`
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+Clear the signature canvas
+
+### `expose()`
+
+Asynchronous function which exposes signature as base64 string
