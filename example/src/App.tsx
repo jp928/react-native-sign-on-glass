@@ -8,7 +8,7 @@ export default function App() {
     <View style={styles.container}>
       <SignOnGlassView
         ref={ref}
-        color="#e3e3e3"
+        // color="#e3e3e3"
         style={styles.box}
         handleDrawingStarted={() => console.log('Drawing started')}
       />
@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     marginVertical: 20,
+    backgroundColor: 'red',
   },
 });
