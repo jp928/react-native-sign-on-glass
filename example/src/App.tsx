@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Alert, Button, StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import SignOnGlassView from 'react-native-sign-on-glass';
 
 export default function App() {
@@ -10,7 +10,7 @@ export default function App() {
         ref={ref}
         color="#e3e3e3"
         style={styles.box}
-        handleDrawingStarted={() => Alert.alert('Drawing started')}
+        handleDrawingStarted={() => console.log('Drawing started')}
       />
       <Button title="Clear" onPress={() => ref.current.clear()} />
       <Button

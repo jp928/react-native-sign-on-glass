@@ -7,14 +7,13 @@ import type {
 import type { WithDefault } from 'react-native/Libraries/Types/CodegenTypes';
 import codegenNativeCommands from 'react-native/Libraries/Utilities/codegenNativeCommands';
 
-interface SignatureExposedEvent {
-  signature: string;
-}
+// interface SignatureExposedEvent {
+//   signature: string;
+// }
 
 interface NativeProps extends ViewProps {
   color?: string;
   pencilWeight?: WithDefault<Int32, 2>;
-  onSignatureExposed?: DirectEventHandler<SignatureExposedEvent>;
   onDrawingStarted?: DirectEventHandler<{}>;
 }
 export type SignOnGlassViewNativeComponentType =
@@ -26,7 +25,7 @@ export interface NativeCommands {
   ) => void;
   exposeSignature: (
     viewRef: React.ElementRef<SignOnGlassViewNativeComponentType>
-  ) => string | null;
+  ) => Promise<string>;
 }
 
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
