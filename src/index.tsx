@@ -16,6 +16,11 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
   ({ style, color, pencilWeight, handleDrawingStarted, ...rest }, ref) => {
     const nativeRef = useRef(null);
 
+    const signaturePromiseRef = useRef<{
+      resolve: (value: string) => void;
+      reject: (reason: any) => void;
+    } | null>(null);
+
     useImperativeHandle(
       ref,
       () => ({
@@ -25,23 +30,29 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
           }
         },
         expose: async () => {
-          if (nativeRef.current) {
-            // Return a new promise
-            return SignOnGlassViewCommands.exposeSignature(nativeRef.current);
-          }
-          return null;
+          // Return a new promise
+          return new Promise<string>((resolve, reject) => {
+            if (nativeRef.current) {
+              // Store the promise callbacks
+              signaturePromiseRef.current = { resolve, reject };
+              // Call the native command (this will trigger the event)
+              SignOnGlassViewCommands.exposeSignature(nativeRef.current);
+            } else {
+              reject(new Error('Native view reference not available'));
+            }
+          });
         },
       }),
       [nativeRef]
     );
 
-    // const handleSignatureExposed = (event: any) => {
-    //   const signature = event.nativeEvent.signature || '';
-    //   if (signaturePromiseRef.current) {
-    //     signaturePromiseRef.current.resolve(signature);
-    //     signaturePromiseRef.current = null;
-    //   }
-    // };
+    const handleSignatureExposed = (event: any) => {
+      const signature = event.nativeEvent.signature || '';
+      if (signaturePromiseRef.current) {
+        signaturePromiseRef.current.resolve(signature);
+        signaturePromiseRef.current = null;
+      }
+    };
 
     return (
       <SignOnGlassViewNativeComponent
@@ -53,7 +64,7 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
           console.log('drawing started');
           handleDrawingStarted?.();
         }}
-        // onSignatureExposed={handleSignatureExposed}
+        onSignatureExposed={handleSignatureExposed}
         {...rest}
       />
     );
