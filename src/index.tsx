@@ -7,12 +7,13 @@ interface SignOnGlassViewProps {
   style?: object;
   color?: string;
   pencilWeight?: number;
+  handleDrawingStarted?: () => void;
   clear?: () => void;
   expose?: () => Promise<string | null>;
 }
 
 const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
-  ({ style, color, pencilWeight, ...rest }, ref) => {
+  ({ style, color, pencilWeight, handleDrawingStarted, ...rest }, ref) => {
     const nativeRef = useRef(null);
 
     const signaturePromiseRef = useRef<{
@@ -59,6 +60,10 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
         style={[styles.canvas, style]}
         color={color}
         pencilWeight={pencilWeight}
+        onDrawingStarted={() => {
+          console.log('drawing started');
+          handleDrawingStarted?.();
+        }}
         onSignatureExposed={handleSignatureExposed}
         {...rest}
       />

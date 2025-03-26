@@ -15,6 +15,7 @@ interface NativeProps extends ViewProps {
   color?: string;
   pencilWeight?: WithDefault<Int32, 2>;
   onSignatureExposed?: DirectEventHandler<SignatureExposedEvent>;
+  onDrawingStarted?: DirectEventHandler<{}>;
 }
 export type SignOnGlassViewNativeComponentType =
   React.ComponentType<NativeProps>;

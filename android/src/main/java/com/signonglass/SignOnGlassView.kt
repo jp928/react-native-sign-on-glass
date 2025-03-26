@@ -27,7 +27,8 @@ class SignOnGlassView(context: Context?, attrs: AttributeSet?) : SignaturePad(co
         // Set on signature listener
         setOnSignedListener(object : SignaturePad.OnSignedListener {
             override fun onStartSigning() {
-                // Optional: Handle start of signing
+                // Emit drawing started event
+                dispatchDrawingStartedEvent()
             }
 
             override fun onSigned() {
@@ -38,6 +39,20 @@ class SignOnGlassView(context: Context?, attrs: AttributeSet?) : SignaturePad(co
                 // Optional: Handle when signature is cleared
             }
         })
+    }
+
+    private fun dispatchDrawingStartedEvent() {
+        val event = Arguments.createMap().apply {
+            // You can add additional data here if needed
+        }
+
+        val reactContext = context as ReactContext
+        
+        reactContext.getJSModule(RCTEventEmitter::class.java)?.receiveEvent(
+            id,                     // View ID
+            "drawingStarted",      // Event name matching the one in TypeScript
+            event                  // Event data
+        )
     }
 
     fun setPencilWeight(weight: Int) {
