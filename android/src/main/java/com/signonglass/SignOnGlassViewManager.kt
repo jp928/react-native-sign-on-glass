@@ -74,6 +74,12 @@ class SignOnGlassViewManager : SimpleViewManager<SignOnGlassView>(),
           "onSignatureExposed"
         )
       )
+      .put("drawingStarted", 
+        MapBuilder.of(
+          "registrationName",
+          "onDrawingStarted"
+        )
+      )
       .build()
   }
 

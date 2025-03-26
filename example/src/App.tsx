@@ -1,13 +1,17 @@
 import { useRef } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { Alert, Button, StyleSheet, View } from 'react-native';
 import SignOnGlassView from 'react-native-sign-on-glass';
 
 export default function App() {
   const ref = useRef<any>(null);
-
   return (
     <View style={styles.container}>
-      <SignOnGlassView ref={ref} color="#e3e3e3" style={styles.box} />
+      <SignOnGlassView
+        ref={ref}
+        color="#e3e3e3"
+        style={styles.box}
+        handleDrawingStarted={() => Alert.alert('Drawing started')}
+      />
       <Button title="Clear" onPress={() => ref.current.clear()} />
       <Button
         title="Expose"

@@ -36,6 +36,7 @@ using namespace facebook::react;
     
     // Initialize PKCanvasView
     _canvasView = [[PKCanvasView alloc] initWithFrame:self.bounds];
+    _canvasView.delegate = self;
     _canvasView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _canvasView.backgroundColor = [UIColor clearColor];
 
@@ -47,6 +48,10 @@ using namespace facebook::react;
     _canvasView.tool = inkingTool;
     
     self.contentView = _canvasView;
+
+    // Enable user interaction
+    _canvasView.userInteractionEnabled = YES;
+    self.userInteractionEnabled = YES;
   }
   
   return self;
@@ -54,20 +59,20 @@ using namespace facebook::react;
 
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-    const auto &oldViewProps = *std::static_pointer_cast<SignOnGlassViewProps const>(_props);
-    const auto &newViewProps = *std::static_pointer_cast<SignOnGlassViewProps const>(props);
-
-    if (oldViewProps.color != newViewProps.color) {
-        NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
-        UIColor *newColor = [self hexStringToColor:colorToConvert];
-        // _canvasView.tool = [[PKInkingTool alloc] initWithInkType:PKInkTypePen color:newColor width:self.pencilWeight];
-        _canvasView.backgroundColor = newColor;
-    }
-
-//    if (oldViewProps.pencilWeight != newViewProps.pencilWeight) {
-//        self.pencilWeight = newViewProps.pencilWeight;
-//        _canvasView.tool = [[PKInkingTool alloc] initWithInkType:PKInkTypePen color:_canvasView.tool.color width:self.pencilWeight];
+//    const auto &oldViewProps = *std::static_pointer_cast<SignOnGlassViewProps const>(_props);
+//    const auto &newViewProps = *std::static_pointer_cast<SignOnGlassViewProps const>(props);
+//
+//    if (oldViewProps.color != newViewProps.color) {
+//        NSString * colorToConvert = [[NSString alloc] initWithUTF8String: newViewProps.color.c_str()];
+//        UIColor *newColor = [self hexStringToColor:colorToConvert];
+//        _canvasView.tool = [[PKInkingTool alloc] initWithInkType:PKInkTypePen color:newColor width:self.pencilWeight];
+//        _canvasView.backgroundColor = newColor;
 //    }
+
+//   if (oldViewProps.pencilWeight != newViewProps.pencilWeight) {
+//       self.pencilWeight = newViewProps.pencilWeight;
+//       _canvasView.tool = [[PKInkingTool alloc] initWithInkType:PKInkTypePen color:_canvasView.tool.color width:self.pencilWeight];
+//   }
 
     [super updateProps:props oldProps:oldProps];
 }
@@ -91,6 +96,17 @@ Class<RCTComponentViewProtocol> SignOnGlassViewCls(void)
     return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:1.0f];
 }
 
+#pragma mark - PKCanvasViewDelegate Methods
+
+- (void)canvasViewDidBeginUsingTool:(PKCanvasView *)canvasView {
+    if (_eventEmitter) {
+        // std::dynamic_pointer_cast<const facebook::react::EventEmitter>(_eventEmitter)
+        //     ->dispatchEvent("drawingStarted", folly::dynamic::object());
+
+         std::dynamic_pointer_cast<const facebook::react::SignOnGlassViewEventEmitter>(_eventEmitter)
+            ->onDrawingStarted({});
+    }
+}
 
 - (void)clearSignature {
     _canvasView.drawing = [[PKDrawing alloc] init];
