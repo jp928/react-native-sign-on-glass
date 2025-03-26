@@ -8,6 +8,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SignOnGlassView : RCTViewComponentView<PKCanvasViewDelegate>
+- (void) clearSignature;
+- (void) exposeSignature;
 @end
 
 NS_ASSUME_NONNULL_END
