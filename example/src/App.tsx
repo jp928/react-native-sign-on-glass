@@ -1,11 +1,13 @@
-import { useRef } from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Button, StyleSheet, Text, ScrollView } from 'react-native';
 import SignOnGlassView from 'react-native-sign-on-glass';
 
 export default function App() {
   const ref = useRef<any>(null);
+
+  const [encoded, setEncoded] = useState();
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <SignOnGlassView
         ref={ref}
         // color="#e3e3e3"
@@ -14,13 +16,14 @@ export default function App() {
       />
       <Button title="Clear" onPress={() => ref.current.clear()} />
       <Button
-        title="Expose"
+        title="Expose!"
         onPress={async () => {
           const base64 = await ref.current.expose();
-          console.log(base64);
+          setEncoded(base64);
         }}
       />
-    </View>
+      <Text>{encoded}</Text>
+    </ScrollView>
   );
 }
 
