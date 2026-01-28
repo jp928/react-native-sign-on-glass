@@ -26,7 +26,7 @@ export interface NativeCommands {
   ) => void;
   exposeSignature: (
     viewRef: React.ElementRef<SignOnGlassViewNativeComponentType>
-  ) => string | null;
+  ) => void;
 }
 
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({

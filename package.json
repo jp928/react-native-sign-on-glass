@@ -1,6 +1,6 @@
 {
   "name": "react-native-sign-on-glass",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Sign on glass",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",

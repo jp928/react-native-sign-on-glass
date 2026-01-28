@@ -61,7 +61,6 @@ const SignOnGlassView = forwardRef<SignOnGlassViewProps, any>(
         color={color}
         pencilWeight={pencilWeight}
         onDrawingStarted={() => {
-          console.log('drawing started');
           handleDrawingStarted?.();
         }}
         onSignatureExposed={handleSignatureExposed}
