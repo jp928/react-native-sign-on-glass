@@ -1,5 +1,5 @@
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
-import type { ViewProps } from 'react-native';
+import type { HostComponent, ViewProps } from 'react-native';
 import type {
   DirectEventHandler,
   Int32,
@@ -26,11 +26,13 @@ export interface NativeCommands {
   ) => void;
   exposeSignature: (
     viewRef: React.ElementRef<SignOnGlassViewNativeComponentType>
-  ) => void;
+  ) => string | null;
 }
 
 export const Commands: NativeCommands = codegenNativeCommands<NativeCommands>({
   supportedCommands: ['clearSignature', 'exposeSignature'],
 });
 
-export default codegenNativeComponent<NativeProps>('SignOnGlassView');
+export default codegenNativeComponent<NativeProps>(
+  'SignOnGlassView'
+) as HostComponent<NativeProps>;
